@@ -58,29 +58,11 @@ def main():
 
         # ==== Forgot Password / Reset Password ====
         elif choice =="4":
-           uname = input("Enter your username: ")
-        # Check if user exists
-           if uname not in update_password.__globals__["users_db"]:
-                print("Username not found. Please register first.")
-           else:
-                print("\n1. Generate a new password")
-                print("2. Enter a new password manually")
-                sub_choice = input("Choose an option: ")
-                if sub_choice == '1':
-                    length = int(input("Enter password length: "))
-                    new_pwd = generate_password(length)
-                    print(f"🔐 Generated New Password: {new_pwd}")
-                elif sub_choice == '2':
-                    new_pwd = input("Enter your new password: ")
-                else:
-                    print("Invalid option.")
-                    exit()
-
-                strength = analyze_strength(new_pwd)
-                hashed = hash_password(new_pwd)
-                update_password(uname, hashed)
-                print(f"✅ Password updated successfully.\n🛡 New Strength: {strength}")
-                print("⚠ Please save your new password securely.")
+            uname = input("Enter your username: ")
+            # Check if user exists
+            update_hash=reset_password(uname)
+            update_password(uname, update_hash)
+          
 
         elif choice == '5':
             print("Exiting...")
